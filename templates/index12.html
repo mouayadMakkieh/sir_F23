@@ -1,0 +1,423 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      background: rgb(248, 254, 254);
+      background: radial-gradient(circle, rgba(248, 254, 254, 1) 0%, rgba(115, 31, 194, 1) 100%);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      border: 2px solid #ccc;
+      background-color: #3a3a3a;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input[type="text"],
+    .form-group select {
+      height: 60px;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      background: none;
+      color: #ccc;
+    }
+
+    .form-group option {
+      background-color: #3a3a3a;
+      color: #ccc;
+    }
+
+    /*.btn {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration-line: none;
+  }*/
+    /* Reset some default styles */
+    h2,
+    div {
+      color: #ccc;
+      margin: 0;
+      padding: 0;
+    }
+
+    h4 {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Style the container */
+    .creators-container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      color: #ccc;
+    }
+
+    /* Style the main heading */
+    .creators-container h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Make creators appear side by side */
+    @media (max-width: 600px) {
+      .creator {
+        width: 100%;
+        /* Stack on smaller screens */
+      }
+    }
+
+    .creator {
+      color: #000;
+      display: block;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .creator li {
+      opacity: 0.3;
+      width: 200px;
+      height: 120px;
+      margin: 5px;
+      display: inline-block;
+      border: 4px solid #FFF;
+      -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+      color: #FFF;
+      font-size: 1.5em;
+      font-weight: 700;
+      -webkit-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9);
+      -webkit-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
+      transition: all 0.4s ease;
+    }
+
+    .creator li span {
+      position: relative;
+
+    }
+
+    .creator li span h4 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .creators-container .creator {
+      background: rgb(248, 254, 254);
+      background: radial-gradient(circle, rgba(248, 254, 254, 1) 0%, rgba(115, 31, 194, 1) 100%);
+      padding: 10px;
+      height: 80px;
+      padding-top: 40px;
+      border-radius: 7px;
+      border: 1px solid #ccc;
+    }
+
+    .div2 {
+      width: 100%;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    .table th,
+    .table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    .table-dark th {
+      background-color: #9e67d6;
+      color: white;
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+      background-color: #f2f2f2;
+    }
+
+    .table-striped tbody tr:nth-child(even) {
+      background-color: #e0e0e0;
+    }
+
+    .resulte {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: none;
+      background: none;
+      color: white;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: none;
+      padding: 15px;
+      font-size: 18px;
+      color: #f5f5f5;
+      width: 100%
+    }
+
+    .label {
+      position: absolute;
+      left: 15px;
+      color: none;
+      pointer-events: none;
+      transform: translateY(15px);
+      font-size: 18px;
+      transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input:focus~label,
+    input:valid~label {
+      transform: translateX(-10%)translateX(-50%) scale(0.9);
+      background-color: #212121;
+      padding: 0 .2em;
+      color: #fff;
+    }
+
+    .filepath {
+      margin-left: 40%;
+      height: 40px;
+    }
+
+    #myFileInput {
+      height: 40px;
+    }
+
+    a:not(.normal-link) {
+      position: relative;
+      display: inline-block;
+      padding: 20px 25px;
+      color: #9e67d6;
+      text-decoration: none;
+      transition: 0.5s;
+      letter-spacing: 4px;
+      overflow: hidden;
+      margin-right: 50px;
+
+    }
+
+    a:not(.normal-link):hover {
+      background: #9e67d6;
+      color: #050801;
+      box-shadow: 0 0 5px #9e67d6,
+        0 0 25px #9e67d6,
+        0 0 50px #9e67d6,
+        0 0 200px #9e67d6;
+      -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+    }
+
+    a:nth-child(2) {
+      filter: hue-rotate(110deg);
+    }
+
+    a span {
+      position: absolute;
+      display: block;
+    }
+
+    a span:nth-child(1) {
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #9e67d6);
+      animation: animate1 1s linear infinite;
+    }
+
+    @keyframes animate1 {
+      0% {
+        left: -100%;
+      }
+
+      50%,
+      100% {
+        left: 100%;
+      }
+    }
+
+    a span:nth-child(2) {
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, #9e67d6);
+      animation: animate2 1s linear infinite;
+      animation-delay: 0.25s;
+    }
+
+    @keyframes animate2 {
+      0% {
+        top: -100%;
+      }
+
+      50%,
+      100% {
+        top: 100%;
+      }
+    }
+
+    a span:nth-child(3) {
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #9e67d6);
+      animation: animate3 1s linear infinite;
+      animation-delay: 0.50s;
+    }
+
+    @keyframes animate3 {
+      0% {
+        right: -100%;
+      }
+
+      50%,
+      100% {
+        right: 100%;
+      }
+    }
+
+
+    a span:nth-child(4) {
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent, #9e67d6);
+      animation: animate4 1s linear infinite;
+      animation-delay: 0.75s;
+    }
+
+    @keyframes animate4 {
+      0% {
+        bottom: -100%;
+      }
+
+      50%,
+      100% {
+        bottom: 100%;
+      }
+    }
+  </style>
+
+  <title>Indexing Settings</title>
+</head>
+
+<body>
+  <div class="container">
+    <form id="indexingForm" method="post" enctype="multipart/form-data">
+      <div>
+        <input class="filepath" type="file" id="myFileInput" />
+      </div>
+      <div class="form-group">
+        <label for="language">Language:</label>
+        <select id="language" name="language">
+          <option selected>Choose...</option>
+          <option value="en">English</option>
+          <option value="ar">Arabic</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="weightingAlgorithm">Weighting Algorithm:</label>
+        <select id="weightingAlgorithm" name="weightingAlgorithm">
+          <option selected>Choose...</option>
+          <option value="TF">TF</option>
+          <option value="IDF">IDF</option>
+        </select>
+      </div>
+      <a class="btn" href="index.html"><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        START</a>
+    </form>
+    <div class="creators-container">
+      <h2>Created by:</h2>
+      <li class="creator">
+        <span>
+          <h4>Rama_153886</h4>
+          <h4>C2</h4>
+        </span>
+      </li>
+      <li class="creator">
+        <span>
+          <h4>Mouayad_123521</h4>
+          <h4>C2</h4>
+        </span>
+      </li>
+      <li class="creator">
+        <span>
+          <h4>lana_122752</h4>
+          <h4>C2</h4>
+        </span>
+      </li>
+      <li class="creator">
+        <span>
+          <h4>Sarah_140183</h4>
+          <h4>C1</h4>
+        </span>
+      </li>
+    </div>
+  </div>
+  <script>
+    document
+      .getElementById("myFileInput")
+      .addEventListener("change", function (event) {
+        var fileName = event.target.files[0].name;
+        document.getElementById("fileNameDisplay").textContent =
+          "Selected File: " + fileName;
+      });
+  </script>
+</body>
+
+</html>
